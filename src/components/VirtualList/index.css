@@ -1,0 +1,23 @@
+.scroll-container {
+    height: calc(100vh - 2px);
+    overflow: auto;
+    border: 1px solid #ccc;
+}
+
+.scroll-placement {
+    width: 100%;
+}
+
+.scroll-runway {
+    width: 100%;
+}
+.fixed {
+    right: 20px;
+    top: 0;
+    padding: 12px;
+    width: 120px;
+    height: 30px;
+    position: fixed;
+    background: #fff;
+    z-index: 10;
+}

@@ -1,0 +1,11 @@
+.wrapper {
+
+}
+
+.scroll-container {
+   height: calc(100vh - 150px);
+   overflow: auto;
+   position: relative;
+   overflow-anchor: none;
+}
+

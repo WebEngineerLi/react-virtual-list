@@ -1,4 +1,4 @@
-import mock from 'mockjs'
+import { Random } from 'mockjs'
 
 export const fetchData = (count = 1000) => {
 	return new Promise((resolve, reject) => {
@@ -6,10 +6,12 @@ export const fetchData = (count = 1000) => {
 		setTimeout(() => {
 			for (let i = 0; i < count; i++) {
 				list.push({
-					title: mock.title(10, 100),
-					detail: mock.content(100, 1000),
+					title: Random.ctitle(10, 30),
+					content: Random.cparagraph(10, 50),
+					id: i
 				})
 			}
+			resolve(list)
 		}, 1000)
 	})
 }

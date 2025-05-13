@@ -2,11 +2,6 @@ name: Deploy Static Page
 on:
   push:
     branches: ["main"]  # 触发分支
-
-permissions:
-  pages: write
-  id-token: write
-
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -16,6 +16,7 @@ const VirtualList = (props) => {
 	const visibleCount = useRef(0)
 	const [initTime, setInitTime] = useState(0);
 	const scrollContainerRef = useRef(null)
+	// 触发重新render
 	const [_, setRefreshTime] = useState(0);
 
 	useEffect(() => {

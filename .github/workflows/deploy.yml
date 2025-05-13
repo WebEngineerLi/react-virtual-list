@@ -8,20 +8,3 @@ jobs:
     steps:
       - name: Install Dependencies
         run: npm install
-      - name: Build
-        run: npm run build
-  deploy:
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./build  # 上传整个项目根目录
-
-      - name: Deploy
-        uses: actions/deploy-pages@v4

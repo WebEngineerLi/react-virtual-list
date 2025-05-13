@@ -16,6 +16,10 @@ jobs:
       - name: Build
         run: npm run build
   deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

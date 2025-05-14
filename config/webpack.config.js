@@ -592,6 +592,45 @@ module.exports = function (webpackEnv) {
             : undefined
         )
       ),
+      // 生成 404.html  并注入脚本
+      new HtmlWebpackPlugin(
+        Object.assign(
+          {},
+          {
+            inject: 'body',
+            template: paths.appHtml,
+            filename: '404.html',
+            scriptLoading: 'blocking',
+            minify: false, // 避免压缩导致脚本被破坏
+            templateParameters: {
+              redirectScript: `
+          <script>
+            // 动态重定向脚本（压缩版）
+            const r=()=>{const e=location.host.includes('github.io')?location.pathname.split('/').slice(0,2).join(''):'';  
+            sessionStorage.redirect ||(sessionStorage.redirect='1',location.replace(e+'/#'+location.pathname.slice(e.length)))}; 
+            r();
+          </script>
+        `
+            }
+          },
+          isEnvProduction
+            ? {
+              minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+              },
+            }
+            : undefined
+        )
+      ),
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
       // https://github.com/facebook/create-react-app/issues/5358

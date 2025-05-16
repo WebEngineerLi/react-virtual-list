@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import VirtualList from "@/components/VirtualList";
 import VirtualListV2 from "@/components/VirtualListV2";
 
@@ -14,6 +14,10 @@ function App() {
         <Route
           path="/virtual-list-v2"
           element={<VirtualListV2 />}
+        />
+        <Route
+          path={"*"}
+          element={<Navigate to="/virtual-list" replace />}
         />
       </Routes>
     </div>

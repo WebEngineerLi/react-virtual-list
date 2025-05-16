@@ -63,7 +63,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "build:no-lint": "DISABLE_ESLINT_PLUGIN=true PUBLIC_URL=/react-virtual-list node scripts/build.js",
+    "build:no-lint": "DISABLE_ESLINT_PLUGIN=true node scripts/build.js",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {

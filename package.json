@@ -16,6 +16,7 @@
     "bfj": "^7.0.2",
     "browserslist": "^4.18.1",
     "camelcase": "^6.2.1",
+    "caniuse-lite": "^1.0.30001718",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.2.0",
@@ -62,6 +63,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "build:no-lint": "DISABLE_ESLINT_PLUGIN=true PUBLIC_URL=/react-virtual-list node scripts/build.js",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {

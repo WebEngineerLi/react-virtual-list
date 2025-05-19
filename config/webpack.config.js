@@ -51,6 +51,8 @@ const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
 const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
 const disableESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
 
+console.log('disableESLintPlugin', disableESLintPlugin)
+
 const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
 );
@@ -587,6 +589,45 @@ module.exports = function (webpackEnv) {
                   minifyURLs: true,
                 },
               }
+            : undefined
+        )
+      ),
+      // 生成 404.html  并注入脚本
+      new HtmlWebpackPlugin(
+        Object.assign(
+          {},
+          {
+            inject: 'body',
+            template: paths.appHtml,
+            filename: '404.html',
+            scriptLoading: 'blocking',
+            minify: false, // 避免压缩导致脚本被破坏
+            templateParameters: {
+              redirectScript: `
+          <script>
+            // 动态重定向脚本（压缩版）
+            const r=()=>{const e=location.host.includes('github.io')?location.pathname.split('/').slice(0,2).join(''):'';  
+            sessionStorage.redirect ||(sessionStorage.redirect='1',location.replace(e+'/#'+location.pathname.slice(e.length)))}; 
+            r();
+          </script>
+        `
+            }
+          },
+          isEnvProduction
+            ? {
+              minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+              },
+            }
             : undefined
         )
       ),
